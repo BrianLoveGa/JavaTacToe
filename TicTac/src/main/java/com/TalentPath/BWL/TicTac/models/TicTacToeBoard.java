@@ -1,8 +1,8 @@
 package com.TalentPath.BWL.TicTac.models;
 
 public class TicTacToeBoard {
-    Integer gameId;
-    String cell1;
+    Integer gameId; /// auto gen sequence
+    String cell1;  // size limit 3 chars
     String cell2;
     String cell3;
     String cell4;
@@ -11,8 +11,8 @@ public class TicTacToeBoard {
     String cell7;
     String cell8;
     String cell9;
-    String gameState;
-    String gamePassword;
+    String gameState;       // size limit 30 chars
+    String gamePassword;    // size limit 30 chars
 
     public Integer getGameId() {
         return gameId;
