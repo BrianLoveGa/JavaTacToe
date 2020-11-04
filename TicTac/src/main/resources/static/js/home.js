@@ -5,6 +5,16 @@ console.log("Testing 123");
 function startNewGame(){
     /// needs to return and save game id to be used while playing
     console.log("new Game");
+
+    $.ajax({
+        url:'http://localhost8080/api/newgame',
+        success: function (yourGame){
+        console.log(yourGame);
+        },
+        error: function(a,b,c){
+        console.log(a);
+        }
+    });
 }
 
 function makeYourMove(){
