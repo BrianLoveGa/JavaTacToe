@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Profile({"servicetesting", "inmemtesting"})
 public class InMemTicTacToeDao implements TicTacToeDao {
     @Override
-    public TicTacToeBoard addGame() {
+    public TicTacToeBoard addGame(TicTacToeBoard toAdd) {
         return null;
     }
 

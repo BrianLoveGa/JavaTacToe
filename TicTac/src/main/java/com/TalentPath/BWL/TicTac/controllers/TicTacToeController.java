@@ -13,8 +13,9 @@ public class TicTacToeController {
     @Autowired
     TicTacToeService service;
 
-    @PostMapping("/begin")
+    @GetMapping("/begin")
     public Integer startNewGame(){
+        // return 10;
         return service.startNewGame();
     }
 

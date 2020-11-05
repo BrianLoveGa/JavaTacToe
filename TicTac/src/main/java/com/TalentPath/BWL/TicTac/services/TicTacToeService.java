@@ -18,11 +18,17 @@ public class TicTacToeService {
 
 
     public Integer startNewGame() {
-        /// add a game to database - return that game id
+        /// add a new game to database - return that game id
+        TicTacToeBoard toAdd = new TicTacToeBoard();
+        toAdd.setGameState("occupied");
+        toAdd = dao.addGame(toAdd);
 
-        TicTacToeBoard toAdd = dao.addGame();
-        return toAdd.getGameId();
+            return toAdd.getGameId();
     }
+
+
+
+
 
     public TicTacToeBoard getGameById(Integer gameId) {
         //  retrieve game board info from db based on game id

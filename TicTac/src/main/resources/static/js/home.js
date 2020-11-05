@@ -8,10 +8,10 @@ function startNewGame(){
 
     $.ajax({
         url:'http://localhost:8080/api/begin',
-        method: 'POST',
+        method: 'GET',
         success: function (id){
         loadGame(id);
-        console.log(yourGame);
+        console.log(id);
         },
         error: function(a,b,c){
         console.log(a);
@@ -21,16 +21,18 @@ function startNewGame(){
 
 function loadGame(id){
 
-    $.ajax({
-        url: "http://localhost:8080/api/loadgame/" +id,
-        method: 'GET',
-        success: function (data){
-        loadBoard (data);
-    },
-         error: function(a,b,c){
-         console.log(a);
-         }
-    });
+console.log("loading game  " +id);
+
+//    $.ajax({
+//        url: "http://localhost:8080/api/loadgame/" +id,
+//        method: 'GET',
+//        success: function (data){
+//        loadBoard (data);
+//    },
+//         error: function(a,b,c){
+//         console.log(a);
+//         }
+//    });
 }
 
 function loadBoard(board){
