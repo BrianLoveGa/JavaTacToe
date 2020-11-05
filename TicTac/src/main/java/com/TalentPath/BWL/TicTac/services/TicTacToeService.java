@@ -12,14 +12,25 @@ public class TicTacToeService {
     TicTacToeDao dao;
 
     @Autowired
-    public TicTacToeService(TicTacToeDao dao){this.dao = dao;}
-
+    public TicTacToeService(TicTacToeDao dao) {
+        this.dao = dao;
+    }
 
 
     public Integer startNewGame() {
-
-        TicTacToeBoard freshGame = new TicTacToeBoard();
-        return freshGame.getGameId();
-
+        /// add a game to database - return that game id
+        return null;
     }
+
+    public TicTacToeBoard getGameById(Integer gameId) {
+        //  retrieve game board info from db
+        return null;
+    }
+
+    public TicTacToeBoard updateGameById(Integer gameId) {
+        // update info by game id in db
+        return null;
+    }
+
+
 }
