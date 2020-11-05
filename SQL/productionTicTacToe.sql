@@ -5,7 +5,7 @@
 -- Dumped from database version 12.3
 -- Dumped by pg_dump version 12.3
 
--- Started on 2020-11-04 16:43:57
+-- Started on 2020-11-05 17:19:07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,18 +18,18 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE "TicTacToeTest";
+DROP DATABASE "TicTacToeProd";
 --
--- TOC entry 2828 (class 1262 OID 53617)
--- Name: TicTacToeTest; Type: DATABASE; Schema: -; Owner: postgres
+-- TOC entry 2835 (class 1262 OID 53616)
+-- Name: TicTacToeProd; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE "TicTacToeTest" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252';
+CREATE DATABASE "TicTacToeProd" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252';
 
 
-ALTER DATABASE "TicTacToeTest" OWNER TO "postgres";
+ALTER DATABASE "TicTacToeProd" OWNER TO "postgres";
 
-\connect "TicTacToeTest"
+\connect "TicTacToeProd"
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -47,30 +47,23 @@ SET default_tablespace = '';
 SET default_table_access_method = "heap";
 
 --
--- TOC entry 202 (class 1259 OID 53788)
+-- TOC entry 202 (class 1259 OID 53806)
 -- Name: TicTacToeBoard; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE "public"."TicTacToeBoard" (
     "gameId" integer NOT NULL,
-    "cell1" character varying(3),
-    "cell2" character varying(3),
-    "cell3" character varying(3),
-    "cell4" character varying(3),
-    "cell5" character varying(3),
-    "cell6" character varying(3),
-    "cell7" character varying(3),
-    "cell8" character varying(3),
-    "cell9" character varying(3),
     "gameState" character varying(30),
-    "gamePassword" character varying(30)
+    "gamePassword" character varying(30),
+    "gameBoard" character varying[],
+    "allMoves" character varying[]
 );
 
 
 ALTER TABLE "public"."TicTacToeBoard" OWNER TO "postgres";
 
 --
--- TOC entry 204 (class 1259 OID 53794)
+-- TOC entry 204 (class 1259 OID 53812)
 -- Name: TicTacToeBoard_gameId_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -86,7 +79,7 @@ CREATE SEQUENCE "public"."TicTacToeBoard_gameId_seq"
 ALTER TABLE "public"."TicTacToeBoard_gameId_seq" OWNER TO "postgres";
 
 --
--- TOC entry 2829 (class 0 OID 0)
+-- TOC entry 2836 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: TicTacToeBoard_gameId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -95,7 +88,7 @@ ALTER SEQUENCE "public"."TicTacToeBoard_gameId_seq" OWNED BY "public"."TicTacToe
 
 
 --
--- TOC entry 203 (class 1259 OID 53791)
+-- TOC entry 203 (class 1259 OID 53809)
 -- Name: TicTacToeGameHistory; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -109,7 +102,21 @@ CREATE TABLE "public"."TicTacToeGameHistory" (
 ALTER TABLE "public"."TicTacToeGameHistory" OWNER TO "postgres";
 
 --
--- TOC entry 2691 (class 2604 OID 53796)
+-- TOC entry 205 (class 1259 OID 53827)
+-- Name: TicTacToeMove; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE "public"."TicTacToeMove" (
+    "moveLocation" integer[],
+    "moveNumber" integer[],
+    "gameId" integer
+);
+
+
+ALTER TABLE "public"."TicTacToeMove" OWNER TO "postgres";
+
+--
+-- TOC entry 2697 (class 2604 OID 53814)
 -- Name: TicTacToeBoard gameId; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -117,7 +124,7 @@ ALTER TABLE ONLY "public"."TicTacToeBoard" ALTER COLUMN "gameId" SET DEFAULT "ne
 
 
 --
--- TOC entry 2693 (class 2606 OID 53798)
+-- TOC entry 2699 (class 2606 OID 53816)
 -- Name: TicTacToeBoard TicTacToeBoard_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -126,7 +133,7 @@ ALTER TABLE ONLY "public"."TicTacToeBoard"
 
 
 --
--- TOC entry 2695 (class 2606 OID 53800)
+-- TOC entry 2701 (class 2606 OID 53818)
 -- Name: TicTacToeGameHistory TicTacToeGameHistory_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -135,7 +142,7 @@ ALTER TABLE ONLY "public"."TicTacToeGameHistory"
 
 
 --
--- TOC entry 2696 (class 2606 OID 53801)
+-- TOC entry 2702 (class 2606 OID 53819)
 -- Name: TicTacToeGameHistory TicTacToeGameHistory_gameId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -143,7 +150,16 @@ ALTER TABLE ONLY "public"."TicTacToeGameHistory"
     ADD CONSTRAINT "TicTacToeGameHistory_gameId_fkey" FOREIGN KEY ("gameId") REFERENCES "public"."TicTacToeBoard"("gameId") NOT VALID;
 
 
--- Completed on 2020-11-04 16:43:57
+--
+-- TOC entry 2703 (class 2606 OID 53833)
+-- Name: TicTacToeMove TicTacToeMove_gameId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "public"."TicTacToeMove"
+    ADD CONSTRAINT "TicTacToeMove_gameId_fkey" FOREIGN KEY ("gameId") REFERENCES "public"."TicTacToeBoard"("gameId");
+
+
+-- Completed on 2020-11-05 17:19:08
 
 --
 -- PostgreSQL database dump complete

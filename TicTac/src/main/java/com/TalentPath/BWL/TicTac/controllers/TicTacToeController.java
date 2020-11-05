@@ -13,8 +13,21 @@ public class TicTacToeController {
     @Autowired
     TicTacToeService service;
 
-    @GetMapping("/newgame")
-    public Integer getNewGame() {
+    @PostMapping("/begin")
+    public Integer startNewGame(){
         return service.startNewGame();
     }
+
+
+    @GetMapping("/gamestate/{gameId}")
+    public String gamestate(@PathVariable Integer gameId){
+        return service.getGameById(gameId).toString();
+    }
+
+
+    @PutMapping("/move/{gameId}")
+    public String addMove(@PathVariable Integer gameId){
+        return service.updateGameById(gameId).toString();
+    }
+
 }
