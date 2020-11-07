@@ -11,7 +11,7 @@ public interface TicTacToeDao {
     TicTacToeBoard getNewGameId();
     // return id of new created game to use
 
-    TicTacToeBoard getBoardFromGameId();
+    TicTacToeBoard getBoardFromGameId(Integer gameId);
     // return board info by game id
 
     TicTacToeBoard updateBoardByGameId();

@@ -23,7 +23,7 @@ public class PostgresTicTacToeDao implements TicTacToeDao {
     @Override
     public TicTacToeBoard addGame(TicTacToeBoard toAdd) {
         List<Integer> insertedIds = template.query(
-                "INSERT INTO \"TicTacToeBoard\" (\"gameState\") VALUES (' " +toAdd.getGameState()+" ') returning \"gameId\";", new IdMapper() );
+                "INSERT INTO \"TicTacToeBoard\" (\"gameState\", \"gameBoard\") VALUES (' " +toAdd.getGameState()+" ,'['u','u','u','u','u','u','u','u','u']' ') returning \"gameId\";", new IdMapper() );
 
         toAdd.setGameId( insertedIds.get(0));
 
@@ -36,7 +36,10 @@ public class PostgresTicTacToeDao implements TicTacToeDao {
     }
 
     @Override
-    public TicTacToeBoard getBoardFromGameId() {
+    public TicTacToeBoard getBoardFromGameId(Integer gameId) {
+
+        TicTacToeBoard currentGame;
+            /// .query sql where game id = gameId
         return null;
     }
 

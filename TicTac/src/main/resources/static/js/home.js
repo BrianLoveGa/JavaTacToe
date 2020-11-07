@@ -23,20 +23,23 @@ function loadGame(id){
 
 console.log("loading game  " +id);
 
-//    $.ajax({
-//        url: "http://localhost:8080/api/loadgame/" +id,
-//        method: 'GET',
-//        success: function (data){
-//        loadBoard (data);
-//    },
-//         error: function(a,b,c){
-//         console.log(a);
-//         }
-//    });
+    $.ajax({
+        url: "http://localhost:8080/api/gamestate/" +id,
+        method: 'GET',
+        success: function (data){
+        console.log(data);
+        loadBoard (data);
+    },
+         error: function(a,b,c){
+         console.log(a);
+         }
+    });
 }
 
 function loadBoard(board){
 /// display the game board data on the page with jquery
+console.log(data);
+return 10;
 }
 
 function makeYourMove(){

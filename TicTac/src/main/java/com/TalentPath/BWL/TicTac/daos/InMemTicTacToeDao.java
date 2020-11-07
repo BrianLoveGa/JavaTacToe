@@ -19,7 +19,7 @@ public class InMemTicTacToeDao implements TicTacToeDao {
     }
 
     @Override
-    public TicTacToeBoard getBoardFromGameId() {
+    public TicTacToeBoard getBoardFromGameId(Integer gameId) {
         return null;
     }
 

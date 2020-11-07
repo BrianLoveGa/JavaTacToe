@@ -22,17 +22,16 @@ public class TicTacToeService {
         TicTacToeBoard toAdd = new TicTacToeBoard();
         toAdd.setGameState("occupied");
         toAdd = dao.addGame(toAdd);
-
-            return toAdd.getGameId();
+        Integer gameNumber = toAdd.getGameId();
+            return gameNumber;
     }
-
-
-
 
 
     public TicTacToeBoard getGameById(Integer gameId) {
         //  retrieve game board info from db based on game id
-        return null;
+        TicTacToeBoard currentGame = dao.getBoardFromGameId(gameId);
+
+        return currentGame;
     }
 
     public TicTacToeBoard updateGameById(Integer gameId) {
